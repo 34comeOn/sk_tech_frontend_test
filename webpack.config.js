@@ -1,51 +1,38 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
   mode: "development",
   output: {
     filename: "./main.js",
     chunkFilename: "[name].bundle.js"
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    static: {
+      directory: path.join(__dirname, 'dist')
+    },
     compress: true,
     port: 3000,
-    watchContentBase: true,
-    progress: true
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    })
+    new MiniCssExtractPlugin()
   ],
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: "babel-loader"
-        }
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: "ts-loader"
-        }
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ],
       },
       {
         test: /\.css$/,
         use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              modules: true
-            }
-          }
+          MiniCssExtractPlugin.loader,
+          "css-loader"
         ]
       },
       {

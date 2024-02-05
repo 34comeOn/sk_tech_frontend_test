@@ -2,7 +2,7 @@
   "name": "react-scratch",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack"
@@ -21,42 +21,26 @@
     "typed-redux-saga": "^1.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
+    "@babel/core": "^7.23.9",
     "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-env": "^7.23.9",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.2",
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
+    "@webpack-cli/serve": "^2.0.5",
     "babel-loader": "^8.0.5",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "css-loader": "^2.1.0",
+    "css-loader": "^6.10.0",
     "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^2.8.0",
     "react-dom": "^17.0.2",
     "style-loader": "^0.23.1",
     "ts-loader": "~8.2.0",
     "typescript": "^4.6.2",
-    "webpack": "5.40.0",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env",
-      "@babel/react"
-    ],
-    "plugins": [
-      "syntax-dynamic-import",
-      [
-        "@babel/plugin-transform-runtime",
-        {
-          "regenerator": true
-        }
-      ]
-    ]
-  },
-  "optionalDependencies": {
-    "mini-css-extract-plugin": "^0.5.0"
+    "webpack": "^5.90.1",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.15.1"
   }
 }

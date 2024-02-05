@@ -6,7 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import reducers from './reducers';
 import rootSaga from './sagas';
 import Messenger from './components/Messenger';
-import './index.css';
+import './index.module.css';
 
 try {
   const sagaMiddleware = createSagaMiddleware();

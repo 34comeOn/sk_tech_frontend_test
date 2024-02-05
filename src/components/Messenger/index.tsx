@@ -8,7 +8,7 @@ import {
     getMainMessagesList,
 } from '../../selectors/mainSelector';
 import { MessagesList } from '../../types';
-import styles from './styles.css';
+import styles from './styles.module.css';
 
 export interface Props {
     username: string
@@ -56,8 +56,8 @@ const Home = (props: Props) => {
                 }
                 {
                     messages !== null && messages.length
-                        ? messages.map(message =>
-                            <li className={styles.messageItem}>
+                        ? messages.map((message,key) =>
+                            <li key={key} className={styles.messageItem}>
                                 <div className={styles.messageText}>
                                     <div className={styles.messageSender}>
                                         {message.sender}
