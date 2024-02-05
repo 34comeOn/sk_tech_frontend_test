@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { mainActions } from '../../actions';
@@ -37,9 +37,15 @@ const Home = (props: Props) => {
     } = props;
     const [messageText, setmessageText] = React.useState('');
 
+    const bottomRef = useRef(null);
+
     React.useEffect(() => {
         getMessagesList();
     }, []);
+
+    React.useEffect(() => {
+        bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
     
     return (
         <div className={styles.root}>
@@ -71,6 +77,7 @@ const Home = (props: Props) => {
                         )                        
                         : null
                 }
+                <div id="bottom-reference" ref={bottomRef} />
             </ul>
             <form className={styles.newMessagePanel}>
                 <div className={styles.usernameContainer}>
