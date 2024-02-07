@@ -1,9 +1,19 @@
-import MainApi from './MainApi';
+import { Message } from 'types';
+import { API_URL } from '../constants/index';
 
-export {
-    MainApi,
-};
+export const postMessage = async (message: Message) => {
+    fetch(API_URL, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        method: "POST",
+        body: JSON.stringify(message)
+    })
 
-export default {
-    MainApi,
-};
+}
+export const getMessages = async () => {
+    const data = await fetch(API_URL)
+
+    return await data.json()
+}
