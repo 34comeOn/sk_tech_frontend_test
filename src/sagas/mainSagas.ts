@@ -5,10 +5,15 @@ import { getMessages, postMessage } from '../api/index';
 
 export function* mainMessagesList(): Generator<any, void, any> {
     try {
-        const data = yield call(getMessages);
+        const [data, status] = yield call(getMessages);
         const storedMessagesList = yield select(({main}) => main.messagesList);  
 
-        if (data.length !== storedMessagesList?.length) {
+        if (!status) {
+            throw new Error('Bad get request')
+        }
+        if (storedMessagesList === null) {
+            yield put(mainActions.mainMessagesListSuccess(data));
+        } else if (data.length > storedMessagesList.length) {
             yield put(mainActions.mainMessagesListSuccess(data));
         }
 
@@ -24,7 +29,10 @@ export function* mainMessagesList(): Generator<any, void, any> {
 export function* sendMessage(): Generator<any, void, any> {
     try {
         const storedMessagesList = yield select(({main}) => main.messagesList);  
-        yield postMessage(storedMessagesList.at(-1))
+        const status = yield postMessage(storedMessagesList.at(-1));
+        if (!status) {
+            throw new Error('Bad post request')
+        }
     } catch (error) {
         yield put(mainActions.mainMessagesListFailed(error));
         console.log('sending error', error);

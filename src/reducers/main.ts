@@ -33,7 +33,6 @@ const main = (state = initialState, action: TAction) => {
         case MAIN_MESSAGES_LIST_SUCCESS: {
             const newState = Object.assign({}, state);
             newState.messagesList = action.messagesList;
-            console.log(newState.messagesList)
             return newState;
         }
         case MAIN_MESSAGES_LIST_FAILED: {

@@ -2,7 +2,7 @@ import { Message } from 'types';
 import { API_URL } from '../constants/index';
 
 export const postMessage = async (message: Message) => {
-    fetch(API_URL, {
+    const result = await fetch(API_URL, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -10,10 +10,12 @@ export const postMessage = async (message: Message) => {
         method: "POST",
         body: JSON.stringify(message)
     })
-
+    
+    return result.ok
 }
-export const getMessages = async () => {
-    const data = await fetch(API_URL)
 
-    return await data.json()
+export const getMessages = async () => {
+    const result = await fetch(API_URL);
+
+    return [await result.json(), result.ok]
 }
